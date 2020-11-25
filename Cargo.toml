@@ -1,0 +1,15 @@
+[package]
+name = "md-rs"
+version = "0.1.0"
+authors = ["immortal infidel <immortal.infidel@gmail.com>"]
+edition = "2018"
+license="MIT"
+description="Median Over Period (MD) Implementation In Rust"
+repository="https://github.com/immortalinfidel/md-rs"
+homepage="https://github.com/immortalinfidel/md-rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ta-common = {  version = "0.1.0" }
+sma-rs = {  version = "0.1.0" }

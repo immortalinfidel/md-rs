@@ -6,6 +6,7 @@ use ta_common::fixed_queue::FixedQueue;
 pub struct MD {
     period: u32,
     sma: SMA,
+    current_sma:f64,
     history: FixedQueue<f64>,
 }
 
@@ -15,7 +16,12 @@ impl MD {
             period,
             sma: SMA::new(period),
             history: FixedQueue::new(period),
+            current_sma:0.0,
         }
+    }
+
+    pub fn get_current_sma(&self)->f64{
+        return self.current_sma;
     }
 }
 
@@ -23,6 +29,7 @@ impl Indicator<f64, Option<f64>> for MD {
     fn next(&mut self, input: f64) -> Option<f64> {
         self.history.add(input);
         let sma = self.sma.next(input).unwrap();
+        self.current_sma=sma;
         return if self.history.is_full() {
             let mut sum_md = 0.0;
             for i in 0..self.history.size() as i32 {
@@ -37,6 +44,7 @@ impl Indicator<f64, Option<f64>> for MD {
 
     fn reset(&mut self) {
         self.sma.reset();
+        self.current_sma=0.0;
     }
 }
 
